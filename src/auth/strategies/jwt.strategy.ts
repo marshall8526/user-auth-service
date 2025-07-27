@@ -4,7 +4,7 @@ import { ExtractJwt, Strategy } from 'passport-jwt';
 import { ConfigService } from '@nestjs/config';
 import { users, User } from '../../database/schema';
 import { Database, DATABASE_CONNECTION } from '../../database/types';
-import { eq } from 'drizzle-orm';
+import { eq } from "drizzle-orm";
 import { ITokenPayload } from '../interfaces/token-payload.interface';
 
 @Injectable()
