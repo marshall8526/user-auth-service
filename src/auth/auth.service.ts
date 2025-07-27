@@ -47,7 +47,7 @@ export class AuthService {
       ))
       .execute();
 
-    if (existingUser) {
+    if (existingUser.length > 0) {
       throw new ConflictException('User already exists');
     }
 

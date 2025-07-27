@@ -125,6 +125,9 @@ describe('AuthService', () => {
       };
       
       const hashedPassword = 'hashedPassword123';
+  
+      mockDb.execute.mockResolvedValueOnce([]);
+      
       mockedBcrypt.hash.mockResolvedValue(hashedPassword as never);
       mockDb.returning.mockResolvedValue([mockUser]);
 
@@ -137,6 +140,21 @@ describe('AuthService', () => {
         ...createUserDto,
         password: hashedPassword,
       });
+    });
+
+    it('should throw ConflictException when user already exists', async () => {
+      const createUserDto: CreateUserDto = {
+        username: 'existinguser',
+        email: 'existing@example.com',
+        password: 'password123',
+        fullName: 'Existing User',
+      };
+      
+      mockDb.execute.mockResolvedValueOnce([mockUser]);
+
+      await expect(service.register(createUserDto)).rejects.toThrow('User already exists');
+      expect(mockDb.execute).toHaveBeenCalledTimes(1);
+      expect(mockDb.insert).not.toHaveBeenCalled();
     });
   });
 });

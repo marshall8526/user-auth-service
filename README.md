@@ -34,6 +34,18 @@ npm run start:dev
 npm run start:prod
 ```
 
+## Testing
+
+### Unit Tests
+```bash
+npm run test
+```
+
+### E2E Tests
+```bash
+npm run test:e2e
+```
+
 ## API Endpoints
 
 ### POST /auth/register
