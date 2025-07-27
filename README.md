@@ -18,6 +18,7 @@ npm install
 Create `.env` file:
 ```
 DATABASE_URL=postgresql://service:servicepwd@localhost:5432/auth
+JWT_SECRET=strong-secret
 ```
 
 ### 4. Run Drizzle migrations
