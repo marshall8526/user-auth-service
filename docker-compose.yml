@@ -1,0 +1,27 @@
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: auth_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: service
+      POSTGRES_PASSWORD: servicepwd
+      POSTGRES_DB: auth
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7.4.2
+    container_name: redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+volumes:
+  postgres_data:
+  redis_data:
