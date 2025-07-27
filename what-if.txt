@@ -1,0 +1,5 @@
+To handle 1000 user registrations and 100,000 login requests per second, I would first add a load balancer to distribute traffic across multiple instances. I'd deploy these instances behind an autoscaling group to handle spikes in traffic.
+
+For data, I'd use a high-performance distributed database like Amazon Aurora or DynamoDB, optimized for write-heavy workloads. Login requests could be cached with Redis to avoid hitting the database too often. For password hashing, I’d use node background workers or queues to avoid blocking the main thread.
+
+Each service would be stateless so it can scale horizontally. Also, I’d add monitoring and rate limiting to detect abuse early and keep the system stable.

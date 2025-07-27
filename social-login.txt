@@ -1,0 +1,15 @@
+I’d implement social login using the standard OAuth2 flow.
+
+The client app redirects the user to the provider’s auth endpoint (e.g. Google). After the user grants access, the provider redirects back to our backend (`/auth/callback`) with an authorization code. The backend exchanges that code for an access token, then uses it to fetch the user’s profile (email, name, awatar, etc.).
+
+If the user exists in our DB -> log in and return a JWT.  
+If not -> register a new user, then return a JWT.
+
+Sequence:
+Client -> /auth/google
+         -> Google Consent Screen
+         <- Google redirects to /auth/callback?code=...
+Backend -> Google Token Exchange Endpoint
+Backend -> Google User Info Endpoint
+Backend -> DB (find or create user)
+Backend -> returns JWT to client
